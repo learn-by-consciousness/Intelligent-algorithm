@@ -1,3 +1,4 @@
+#pragma once
 #define DATASET0
 #define ALPHA_INIT 0.98
 #define T0 10000000
