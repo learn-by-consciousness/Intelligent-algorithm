@@ -17,7 +17,15 @@ double getDist(point A, point B)
     double xx = A.x - B.x, yy = A.y - B.y;
     return sqrt(xx * xx + yy * yy);
 }
-
+/*
+##############################################################################
+## 函数：InitDist
+## 函数描述：数据的读取与距离矩阵的生成
+## 参数描述：
+## FILENAME：数据存储文件
+## dis：距离矩阵
+##############################################################################
+*/
 void InitDist(){
     ifstream fin(FILENAME);
     string s;
@@ -54,35 +62,7 @@ void calLength(path *p)
     p->length = ans;
 }
 
-/*
-##############################################################################
-## 函数：getDist
-## 函数描述：数据的读取与距离矩阵的生成
-## 参数描述：
-## FILENAME：数据存储文件
-## dis：距离矩阵
-##############################################################################
-*/
-void getDist()
-{
-    ifstream fin(FILENAME);
-    string s;
-    for (int i = 0; i < PASSNUM; i++)
-        getline(fin, s);
 
-    int x;
-    for (int i = 0; i < SIZE; i++)
-        fin >> x >> pos[i].x >> pos[i].y;
-    fin.close();
-
-    for (int i = 0; i < SIZE; i++)
-    {
-        for (int j = i + 1; j < SIZE; j++)
-        {
-            dis[i][j] = dis[j][i] = getDist(pos[i], pos[j]);
-        }
-    }
-}
 
 /*
 ##############################################################################
@@ -260,3 +240,17 @@ path init()
 
     return random;
 }
+
+
+void saveFile(path *p)
+{
+    static int count = 0;
+    ofstream fout(OUTFILE);
+    for (int i = 0; i < SIZE; i++)
+    {
+        int j = p->point[i];
+        fout << pos[j].x << ' ' << pos[j].y << endl;
+    }
+}
+
+
