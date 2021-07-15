@@ -22,9 +22,12 @@ path SA()
 {
     path curtAns = init();
     path best = curtAns;
+    ofstream fout("../result/sa.length");
 
     double t = T0;
     double alpha = ALPHA_INIT;
+
+    int cnt = 0;
 
     while (t > TN)
     {
@@ -49,11 +52,18 @@ path SA()
                     curtAns = newAns;
                 }
             }
+            if(i%10==0)
+                fout << curtAns.length << endl;
+
+            if(cnt%int(3e6/10)==0)
+                saveFile(&curtAns,"../result/sa");
+            cnt++;
+            
         }
 
         t *= alpha;
     }
-
+    fout.close();
     return best;
 }
 
@@ -66,7 +76,7 @@ int main() {
 
     checkAnswer(&ans);
     showPath(&ans);
-    saveFile(&ans);
+    //saveFile(&ans,"sa");
     showBest();
 
     return 0;

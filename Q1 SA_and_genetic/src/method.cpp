@@ -238,10 +238,14 @@ path init()
 }
 
 
-void saveFile(path *p)
-{
+void saveFile(path *p, const char *filename){
     static int count = 0;
-    ofstream fout(OUTFILE);
+    string outputfilename = filename;
+    string cnt = to_string(count++);
+    outputfilename += cnt;
+    outputfilename += ".txt";
+    
+    ofstream fout(outputfilename);
     for (int i = 0; i < SIZE; i++)
     {
         int j = p->point[i];

@@ -10,13 +10,23 @@ point pos[SIZE];//点坐标
 
 path LS(){
     path ans = init();
+    ofstream fout("../result/ls.length");
 
     for(int i = 0; i < SEARCH_TIME; i++){
         path newAns = getRandPath(ans);
         calLength(&newAns);
         if(newAns.length < ans.length)
             ans = newAns;
+
+        if(i%10==0)
+            fout << ans.length << endl;
+        
+        if(i%(SEARCH_TIME/10)==0){
+            saveFile(&ans, "../result/ls");
+        }
     }
+    fout.close();
+
     return ans;
 }
 
@@ -30,12 +40,7 @@ int main(){
     path ans = LS();
     checkAnswer(&ans);
 
-    cout << "算法产生路径：";
-    for(int i = 0; i < SIZE; i++)
-        cout << ans.point[i] << ' ';
-    cout << endl;
-    saveFile(&ans);
-    cout << "长度：" << ans.length << endl;
+    showPath(&ans);
 
     showBest();
 
