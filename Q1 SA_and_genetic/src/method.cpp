@@ -111,11 +111,7 @@ void showBest()
 
     checkAnswer(&ans);
     calLength(&ans);
-    cout << ans.point[0];
-    for (int i = 1; i < SIZE; i++)
-        cout << "->" << ans.point[i];
-    cout << endl;
-    cout << "length:" << ans.length << endl;
+    showPath(&ans);
 }
 
 /*
@@ -254,3 +250,11 @@ void saveFile(path *p)
 }
 
 
+void showPath(path *p){
+    cout << p->point[0];
+    for (int i = 1; i < SIZE; i++)
+        cout << "->" << p->point[i];
+    cout << endl;
+
+    cout << "length:" << p->length << endl;
+}

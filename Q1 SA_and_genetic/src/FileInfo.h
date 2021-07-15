@@ -51,3 +51,4 @@ path getRandPath(path p);
 path init();
 void checkAnswer(path *p);
 void saveFile(path *p);
+void showPath(path *p);
